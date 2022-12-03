@@ -26,6 +26,14 @@ export const Navbar = () => {
                     >
                         DC
                     </NavLink>
+                    <NavLink
+                        className={({ isActive }) =>
+                            `nav-item nav-link ${isActive ? 'active' : ''}`
+                        }
+                        to="/search"
+                    >
+                        Search
+                    </NavLink>
                 </div>
             </div>
 
@@ -40,10 +48,9 @@ export const Navbar = () => {
                         Logout
                     </NavLink> */}
                     <span className="nav-item nav-link text-primary">
-                        <button className="btn nav-item nav-link">
-                            Logout
-                        </button>
+                        Edwin
                     </span>
+                    <button className="btn nav-item nav-link">Logout</button>
                 </ul>
             </div>
         </nav>
