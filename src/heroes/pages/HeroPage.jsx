@@ -24,7 +24,7 @@ export const HeroPage = () => {
     const heroImgUrl = `/assets/heroes/${id}.jpg`;
 
     return (
-        <div className="row mt-5">
+        <div className="row mt-5 animate__animated animate__bounce">
             <div className="col-4">
                 <img
                     src={heroImgUrl}
