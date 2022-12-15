@@ -12,9 +12,11 @@ export const HeroPage = () => {
     const hero = useMemo(() => getHeroById(id), [id]);
 
     const onNavigateBack = () => {
-        const [publisher] = id.split('-');
+        // const [publisher] = id.split('-');
 
-        navigate(`/${publisher}`);
+        // navigate(`/${publisher}`);
+
+        navigate(-1);
     };
 
     if (!hero) {

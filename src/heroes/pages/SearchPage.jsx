@@ -5,31 +5,26 @@ import queryString from 'query-string';
 import { HeroCard } from '../components';
 
 import { useForm } from '../../hooks/useForm';
+import { getHeroesByName } from '../helpers';
 
 export const SearchPage = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
     const { q: query = '' } = queryString.parse(location.search);
+    const heroes = getHeroesByName(query);
 
-    console.log(query);
+    const showSearch = query.length === 0;
+    const showError = query.length > 0 && heroes.length === 0;
 
     const { searchText, handleInputChange, handleFormReset } = useForm({
-        searchText: '',
+        searchText: query,
     });
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const searchInput = searchText.trim().toLowerCase();
-
-        if (searchInput.length < 2) {
-            return;
-        }
-
-        navigate(`?q=${searchInput}`);
-
-        handleFormReset();
+        navigate(`?q=${searchText}`);
     };
 
     return (
@@ -48,7 +43,7 @@ export const SearchPage = () => {
                             placeholder="Search a hero"
                             className="form-control"
                             name="searchText"
-                            // autoComplete="off"
+                            autoComplete="off"
                             value={searchText}
                             onChange={handleInputChange}
                         />
@@ -63,12 +58,37 @@ export const SearchPage = () => {
                     <h4>Results</h4>
                     <hr />
 
-                    <div className="alert alert-primary">Search a hero</div>
-                    <div className="alert alert-danger">
+                    {/* {query === '' ? (
+                        <div className="alert alert-primary">Search a hero</div>
+                    ) : (
+                        heroes.length === 0 && (
+                            <div className="alert alert-danger">
+                                There are no results with <b> {query} </b>
+                            </div>
+                        )
+                    )} */}
+
+                    <div
+                        className="alert alert-primary animate__animated animate__fadeIn"
+                        style={{
+                            display: showSearch ? '' : 'none',
+                        }}
+                    >
+                        Search a hero
+                    </div>
+
+                    <div
+                        className="alert alert-danger animate__animated animate__fadeIn"
+                        style={{
+                            display: showError ? '' : 'none',
+                        }}
+                    >
                         There are no results with <b> {query} </b>
                     </div>
 
-                    {/* <HeroCard /> */}
+                    {heroes.map((hero) => (
+                        <HeroCard key={hero.id} {...hero} />
+                    ))}
                 </div>
             </div>
         </>
