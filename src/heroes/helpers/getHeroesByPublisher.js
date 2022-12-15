@@ -8,7 +8,7 @@ import { heroes } from '../data/heroes';
  * @returns {Array<Object>}
  */
 export const getHeroesByPublisher = (publisher) => {
-    console.log('Fui llamado');
+    // console.log('Fui llamado');
 
     const validPublishers = ['DC Comics', 'Marvel Comics'];
 
