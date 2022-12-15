@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 
+import PropTypes from 'prop-types';
+
 const CharactersByHero = ({ alter_ego, characters }) => {
     return alter_ego === characters ? null : <p>{characters}</p>;
 };
@@ -50,4 +52,13 @@ export const HeroCard = ({
             </div>
         </div>
     );
+};
+
+HeroCard.propTypes = {
+    id: PropTypes.string.isRequired,
+    superhero: PropTypes.string.isRequired,
+    publisher: PropTypes.string.isRequired,
+    alter_ego: PropTypes.string.isRequired,
+    first_appearance: PropTypes.string.isRequired,
+    characters: PropTypes.string.isRequired,
 };
